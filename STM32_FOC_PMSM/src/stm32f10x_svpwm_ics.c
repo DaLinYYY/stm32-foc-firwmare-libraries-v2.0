@@ -241,6 +241,8 @@ void SVPWM_IcsInit(void)
   {
   }
   ADC_InjectedSequencerLengthConfig(ADC1,2);
+
+  //存储电压为零的ADC值，用作ADC补偿
   SVPWM_IcsCurrentReadingCalibration();
     
   /* ADC2 Injected conversions configuration */ 
@@ -303,8 +305,7 @@ void SVPWM_IcsCurrentReadingCalibration(void)
   ADC_ClearFlag(ADC1, ADC_FLAG_JEOC);   
   ADC_SoftwareStartInjectedConvCmd(ADC1,ENABLE);
   
-  /* ADC Channel used for current reading are read 
-     in order to get zero currents ADC values*/ 
+  /* ADC Channel used for current reading are read in order to get zero currents ADC values*/ 
   for(bIndex=NB_CONVERSIONS; bIndex !=0; bIndex--)
   {
     while(!ADC_GetFlagStatus(ADC1,ADC_FLAG_JEOC)) { }
@@ -324,9 +325,8 @@ void SVPWM_IcsCurrentReadingCalibration(void)
 
 /*******************************************************************************
 * Function Name  : SVPWM_IcsInjectedConvConfig
-* Description    : This function configure ADC1 for ICS current 
-*                  reading and temperature and voltage feedbcak after a 
-*                  calibration of the utilized ADC Channels for current reading
+* Description    : This function configure ADC1 for ICS current reading and temperature and voltage 
+                    feedbcak after a calibration of the utilized ADC Channels for current reading
 * Input          : None
 * Output         : None
 * Return         : None
@@ -334,10 +334,8 @@ void SVPWM_IcsCurrentReadingCalibration(void)
 void SVPWM_IcsInjectedConvConfig(void)
 {
   /* ADC1 Injected conversions configuration */ 
-  ADC_InjectedChannelConfig(ADC1, PHASE_A_ADC_CHANNEL, 1, 
-                                                      SAMPLING_TIME_CK);
-  ADC_InjectedChannelConfig(ADC1, BUS_VOLT_FDBK_CHANNEL, 
-                                                   2, SAMPLING_TIME_CK);
+  ADC_InjectedChannelConfig(ADC1, TEMP_FDBK_CHANNEL     ,   1, SAMPLING_TIME_CK);
+  ADC_InjectedChannelConfig(ADC1, BUS_VOLT_FDBK_CHANNEL ,   2, SAMPLING_TIME_CK);
   
   /* ADC1 Injected conversions trigger is TIM1 TRGO */ 
   ADC_ExternalTrigInjectedConvConfig(ADC1, ADC_ExternalTrigInjecConv_T1_TRGO); 

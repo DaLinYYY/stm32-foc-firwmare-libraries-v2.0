@@ -492,8 +492,8 @@ void NVIC_SystemHandlerConfig(u32 SystemHandler, FunctionalState NewState)
 /*******************************************************************************
 * Function Name  : NVIC_SystemHandlerPriorityConfig
 * Description    : Configures the specified System Handlers priority.
-* Input          : - SystemHandler: specifies the system handler to be
-*                    enabled or disabled.
+* Input          : - SystemHandler  : specifies the system handler to be enabled or disabled.
+                                    : ??????????
 *                    This parameter can be one of the following values:
 *                       - SystemHandler_MemoryManage
 *                       - SystemHandler_BusFault
@@ -502,10 +502,8 @@ void NVIC_SystemHandlerConfig(u32 SystemHandler, FunctionalState NewState)
 *                       - SystemHandler_DebugMonitor
 *                       - SystemHandler_PSV
 *                       - SystemHandler_SysTick
-*                  - SystemHandlerPreemptionPriority: new priority group of the
-*                    specified system handlers.
-*                  - SystemHandlerSubPriority: new sub priority of the specified
-*                    system handlers.
+*                  - SystemHandlerPreemptionPriority: new priority group of the specified system handlers.
+*                  - SystemHandlerSubPriority: new sub priority of the specified ystem handlers.
 * Output         : None
 * Return         : None
 *******************************************************************************/
